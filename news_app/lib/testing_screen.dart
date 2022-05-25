@@ -12,11 +12,9 @@ class _TestingState extends State<Testing> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Center(
-          child: Lottie.network(
-            'https://assets2.lottiefiles.com/packages/lf20_jcikwtux.json',
-          ),
+      body: Center(
+        child: Lottie.network(
+          'https://assets2.lottiefiles.com/packages/lf20_jcikwtux.json',
         ),
       ),
     );

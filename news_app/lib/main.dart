@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import 'main_page.dart';
+import 'package:news_app/screens/home.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,7 +41,7 @@ class _MyAppState extends State<MyApp> {
             style:
                 GoogleFonts.poppins(fontSize: 48, fontWeight: FontWeight.bold),
           ),
-          nextScreen: const MainPage(),
+          nextScreen: Home(),
           duration: 1500,
           splashTransition: SplashTransition.fadeTransition,
         ),
