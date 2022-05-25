@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+
 import 'package:news_app/lists/categorylist.dart';
+import '../article_gather.dart';
 import 'package:news_app/utilities/colors.dart';
 import 'package:news_app/utilities/dimensions.dart';
-
 import '../models/category_model.dart';
+import '../models/article_model.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -15,11 +17,15 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List<CategoryModel> category = <CategoryModel>[];
+  List<ArticleModel> article = <ArticleModel>[];
+
+  GetNews() async {}
 
   @override
   void initState() {
     super.initState();
     category = getCategory();
+    GetNews();
   }
 
   @override
@@ -74,7 +80,9 @@ class _HomeState extends State<Home> {
 class CategoryTile extends StatelessWidget {
   final String categoryImageUrl, categoryName;
 
-  CategoryTile({required this.categoryName, required this.categoryImageUrl});
+  CategoryTile(
+      {Key? key, required this.categoryName, required this.categoryImageUrl})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
