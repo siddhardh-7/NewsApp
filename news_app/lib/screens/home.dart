@@ -19,7 +19,11 @@ class _HomeState extends State<Home> {
   List<CategoryModel> category = <CategoryModel>[];
   List<ArticleModel> article = <ArticleModel>[];
 
-  GetNews() async {}
+  GetNews() async {
+    News newsData = News();
+    await newsData.getNews();
+    article = newsData.articlesData;
+  }
 
   @override
   void initState() {
