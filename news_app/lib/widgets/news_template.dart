@@ -47,9 +47,9 @@ class _NewsTemplateState extends State<NewsTemplate> {
           ),
           Container(
             padding: EdgeInsets.only(
-              left: Dimensions.width10 / 2,
-              right: Dimensions.width10 / 2,
-              bottom: Dimensions.width10 / 2,
+              left: Dimensions.width10,
+              right: Dimensions.width10,
+              bottom: Dimensions.height10 / 2,
             ),
             decoration: BoxDecoration(
                 color: Colors.white,
@@ -65,14 +65,12 @@ class _NewsTemplateState extends State<NewsTemplate> {
                 Text(
                   widget.title,
                   style: TextStyle(
-                    fontSize: 28,
+                    fontSize: 22,
                   ),
                 ),
                 Text(
                   widget.description,
-                  style: TextStyle(
-                    fontSize: 15,
-                  ),
+                  style: TextStyle(fontSize: 15, color: AppColors.blackshade1),
                 ),
               ],
             ),

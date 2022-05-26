@@ -32,7 +32,6 @@ class _MyAppState extends State<MyApp> {
     return GetMaterialApp(
       routes: {
         Home.id: (context) => Home(),
-        CategoryScreen.id: (context) => CategoryScreen(),
       },
       theme: ThemeData(
         textTheme: GoogleFonts.poppinsTextTheme(

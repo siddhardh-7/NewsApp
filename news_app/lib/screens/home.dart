@@ -20,6 +20,7 @@ class _HomeState extends State<Home> {
   List<CategoryModel> category = <CategoryModel>[];
   List<ArticleModel> article = <ArticleModel>[];
 
+  // fetching news data
   Future<void> GetNews() async {
     News newsData = News();
     await newsData.getNews();

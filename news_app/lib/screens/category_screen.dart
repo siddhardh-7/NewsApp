@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/article_gather.dart';
 import 'package:news_app/models/article_model.dart';
+import 'package:news_app/utilities/colors.dart';
+import 'package:news_app/utilities/dimensions.dart';
 import 'package:news_app/widgets/news_template.dart';
 
 class CategoryScreen extends StatefulWidget {
   static String id = 'categoryScreen';
-  const CategoryScreen({Key? key}) : super(key: key);
+  String categoryName;
+  CategoryScreen({Key? key, required this.categoryName}) : super(key: key);
 
   @override
   State<CategoryScreen> createState() => _CategoryScreenState();
@@ -14,21 +17,38 @@ class CategoryScreen extends StatefulWidget {
 class _CategoryScreenState extends State<CategoryScreen> {
   List<ArticleModel> articles = <ArticleModel>[];
 
-  Future<void> GetNews() async {
+  Future<void> getNews() async {
     CategoryNews newsData = CategoryNews();
-    await newsData.getNews('');
+    await newsData.getNews(widget.categoryName);
     articles = newsData.articlesData;
   }
 
   @override
   void initState() {
     super.initState();
-    GetNews();
+    getNews();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.chevron_left,
+            color: Colors.white,
+          ),
+        ),
+        title: Container(
+          padding: EdgeInsets.only(right: Dimensions.width10 * 4),
+          alignment: Alignment.center,
+          child: Text(widget.categoryName.toUpperCase()),
+        ),
+        backgroundColor: AppColors.blackshade3,
+      ),
       body: SingleChildScrollView(
         child: ListView.builder(
             physics: ClampingScrollPhysics(),
