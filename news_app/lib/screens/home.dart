@@ -1,7 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-
 import 'package:news_app/lists/categorylist.dart';
+import 'package:news_app/widgets/category_tile.dart';
+import 'package:news_app/widgets/news_template.dart';
 import '../article_gather.dart';
 import 'package:news_app/utilities/colors.dart';
 import 'package:news_app/utilities/dimensions.dart';
@@ -9,6 +9,7 @@ import '../models/category_model.dart';
 import '../models/article_model.dart';
 
 class Home extends StatefulWidget {
+  static String id = 'home';
   const Home({Key? key}) : super(key: key);
 
   @override
@@ -19,7 +20,7 @@ class _HomeState extends State<Home> {
   List<CategoryModel> category = <CategoryModel>[];
   List<ArticleModel> article = <ArticleModel>[];
 
-  GetNews() async {
+  Future<void> GetNews() async {
     News newsData = News();
     await newsData.getNews();
     article = newsData.articlesData;
@@ -61,8 +62,8 @@ class _HomeState extends State<Home> {
         child: Column(
           children: [
             Container(
-              height: 80,
-              margin: EdgeInsets.only(left: Dimensions.width10),
+              height: Dimensions.height10 * 6,
+              margin: EdgeInsets.only(top: Dimensions.height10),
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
@@ -73,56 +74,19 @@ class _HomeState extends State<Home> {
                       categoryImageUrl: category[index].imageUrl);
                 },
               ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class CategoryTile extends StatelessWidget {
-  final String categoryImageUrl, categoryName;
-
-  CategoryTile(
-      {Key? key, required this.categoryName, required this.categoryImageUrl})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
-      child: Container(
-        padding: EdgeInsets.only(
-            right: Dimensions.width10, top: Dimensions.height10),
-        child: Stack(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(Dimensions.borderRadius5),
-              child: CachedNetworkImage(
-                imageUrl: categoryImageUrl,
-                width: 110,
-              ),
             ),
-            Container(
-              width: 110,
-              decoration: BoxDecoration(
-                color: Colors.black26,
-                borderRadius: BorderRadius.circular(Dimensions.borderRadius5),
-                // image: DecorationImage(
-                //   image: NetworkImage(categoryImageUrl),
-                //   fit: BoxFit.cover,
-                // ),
-              ),
-              alignment: Alignment.center,
-              child: Text(
-                categoryName,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
+            ListView.builder(
+                physics: ClampingScrollPhysics(),
+                itemCount: article.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return NewsTemplate(
+                    title: article[index].title,
+                    description: article[index].description,
+                    url: article[index].url,
+                    urlToImage: article[index].urlToImage,
+                  );
+                }),
           ],
         ),
       ),

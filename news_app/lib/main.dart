@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:news_app/screens/category_screen.dart';
 import 'package:news_app/screens/home.dart';
 
 Future<void> main() async {
@@ -29,6 +30,10 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      routes: {
+        Home.id: (context) => Home(),
+        CategoryScreen.id: (context) => CategoryScreen(),
+      },
       theme: ThemeData(
         textTheme: GoogleFonts.poppinsTextTheme(
           Theme.of(context).textTheme,
