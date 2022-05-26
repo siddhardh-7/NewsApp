@@ -15,12 +15,17 @@ class CategoryScreen extends StatefulWidget {
 }
 
 class _CategoryScreenState extends State<CategoryScreen> {
+  bool _loading = true;
+
   List<ArticleModel> articles = <ArticleModel>[];
 
   Future<void> getNews() async {
     CategoryNews newsData = CategoryNews();
     await newsData.getNews(widget.categoryName);
     articles = newsData.articlesData;
+    setState(() {
+      _loading = false;
+    });
   }
 
   @override
@@ -49,20 +54,26 @@ class _CategoryScreenState extends State<CategoryScreen> {
         ),
         backgroundColor: AppColors.blackshade3,
       ),
-      body: SingleChildScrollView(
-        child: ListView.builder(
-            physics: ClampingScrollPhysics(),
-            itemCount: articles.length,
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return NewsTemplate(
-                title: articles[index].title,
-                description: articles[index].description,
-                url: articles[index].url,
-                urlToImage: articles[index].urlToImage,
-              );
-            }),
-      ),
+      body: _loading
+          ? Center(
+              child: CircularProgressIndicator(
+                color: AppColors.mainColor1,
+              ),
+            )
+          : SingleChildScrollView(
+              child: ListView.builder(
+                  physics: ClampingScrollPhysics(),
+                  itemCount: articles.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return NewsTemplate(
+                      title: articles[index].title,
+                      description: articles[index].description,
+                      url: articles[index].url,
+                      urlToImage: articles[index].urlToImage,
+                    );
+                  }),
+            ),
     );
   }
 }

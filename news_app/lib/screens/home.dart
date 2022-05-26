@@ -17,6 +17,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  bool _loading = true;
+
   List<CategoryModel> category = <CategoryModel>[];
   List<ArticleModel> article = <ArticleModel>[];
 
@@ -25,6 +27,9 @@ class _HomeState extends State<Home> {
     News newsData = News();
     await newsData.getNews();
     article = newsData.articlesData;
+    setState(() {
+      _loading = false;
+    });
   }
 
   @override
@@ -59,38 +64,44 @@ class _HomeState extends State<Home> {
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'User'),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              height: Dimensions.height10 * 6,
-              margin: EdgeInsets.only(top: Dimensions.height10),
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                shrinkWrap: true,
-                itemCount: category.length,
-                itemBuilder: (context, index) {
-                  return CategoryTile(
-                      categoryName: category[index].categoryName,
-                      categoryImageUrl: category[index].imageUrl);
-                },
+      body: _loading
+          ? Center(
+              child: CircularProgressIndicator(
+                color: AppColors.mainColor1,
+              ),
+            )
+          : SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    height: Dimensions.height10 * 6,
+                    margin: EdgeInsets.only(top: Dimensions.height10),
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      itemCount: category.length,
+                      itemBuilder: (context, index) {
+                        return CategoryTile(
+                            categoryName: category[index].categoryName,
+                            categoryImageUrl: category[index].imageUrl);
+                      },
+                    ),
+                  ),
+                  ListView.builder(
+                      physics: ClampingScrollPhysics(),
+                      itemCount: article.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return NewsTemplate(
+                          title: article[index].title,
+                          description: article[index].description,
+                          url: article[index].url,
+                          urlToImage: article[index].urlToImage,
+                        );
+                      }),
+                ],
               ),
             ),
-            ListView.builder(
-                physics: ClampingScrollPhysics(),
-                itemCount: article.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return NewsTemplate(
-                    title: article[index].title,
-                    description: article[index].description,
-                    url: article[index].url,
-                    urlToImage: article[index].urlToImage,
-                  );
-                }),
-          ],
-        ),
-      ),
     );
   }
 }
