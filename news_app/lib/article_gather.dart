@@ -23,7 +23,7 @@ class News {
             url: element["url"],
             urlToImage: element["urlToImage"],
           );
-          print(articleModel.title + '\n');
+          print('${articleModel.title}\n');
           articlesData.add(articleModel);
         }
       });
@@ -52,7 +52,7 @@ class CategoryNews {
             url: element['url'],
             urlToImage: element['urlToImage'],
           );
-          print(articleModel.title + '\n');
+          print('${articleModel.title}\n');
           articlesData.add(articleModel);
         }
       });

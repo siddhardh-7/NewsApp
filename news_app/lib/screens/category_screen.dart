@@ -62,7 +62,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
             )
           : SingleChildScrollView(
               child: ListView.builder(
-                  physics: ClampingScrollPhysics(),
+                  physics: const ClampingScrollPhysics(),
                   itemCount: articles.length,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
