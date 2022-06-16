@@ -7,7 +7,7 @@ import '../utilities/dimensions.dart';
 class CategoryTile extends StatelessWidget {
   final String categoryImageUrl, categoryName;
 
-  CategoryTile(
+  const CategoryTile(
       {Key? key, required this.categoryName, required this.categoryImageUrl})
       : super(key: key);
 
@@ -49,7 +49,7 @@ class CategoryTile extends StatelessWidget {
                 fit: BoxFit.fitWidth,
                 child: Text(
                   categoryName,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w500,
                   ),

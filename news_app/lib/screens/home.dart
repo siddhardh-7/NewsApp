@@ -86,45 +86,18 @@ class _HomeState extends State<Home> {
                       },
                     ),
                   ),
-                  // Swiper(
-                  //   itemCount: article.length,
-                  //   viewportFraction: 0.8,
-                  //   itemWidth: 400.0,
-                  //   scale: 0.9,
-                  //   layout: SwiperLayout.STACK,
-                  //   itemBuilder: (BuildContext context, int index) {
-                  //     return NewsTemplate(
-                  //       title: article[index].title,
-                  //       description: article[index].description,
-                  //       url: article[index].url,
-                  //       urlToImage: article[index].urlToImage,
-                  //     );
-                  //   },
-                  // ),
-                  Column(
-                    children: [
-                      for (int index = 0; index < article.length; index++)
-                        NewsTemplate(
+                  ListView.builder(
+                      physics: const ClampingScrollPhysics(),
+                      itemCount: article.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return NewsTemplate(
                           title: article[index].title,
                           description: article[index].description,
                           url: article[index].url,
                           urlToImage: article[index].urlToImage,
-                        ),
-                    ],
-                  ),
-
-                  // ListView.builder(
-                  //     physics: ClampingScrollPhysics(),
-                  //     itemCount: article.length,
-                  //     shrinkWrap: true,
-                  //     itemBuilder: (context, index) {
-                  //       return NewsTemplate(
-                  //         title: article[index].title,
-                  //         description: article[index].description,
-                  //         url: article[index].url,
-                  //         urlToImage: article[index].urlToImage,
-                  //       );
-                  //     }),
+                        );
+                      }),
                 ],
               ),
             ),

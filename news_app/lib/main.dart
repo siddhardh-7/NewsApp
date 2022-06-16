@@ -26,7 +26,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       routes: {
-        Home.id: (context) => Home(),
+        Home.id: (context) => const Home(),
       },
       theme: ThemeData(
         textTheme: GoogleFonts.poppinsTextTheme(
@@ -40,7 +40,7 @@ class _MyAppState extends State<MyApp> {
             style:
                 GoogleFonts.poppins(fontSize: 48, fontWeight: FontWeight.bold),
           ),
-          nextScreen: Home(),
+          nextScreen: const Home(),
           duration: 1500,
           splashTransition: SplashTransition.fadeTransition,
         ),

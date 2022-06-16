@@ -61,18 +61,23 @@ class _CategoryScreenState extends State<CategoryScreen> {
               ),
             )
           : SingleChildScrollView(
-              child: ListView.builder(
-                  physics: const ClampingScrollPhysics(),
-                  itemCount: articles.length,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return NewsTemplate(
-                      title: articles[index].title,
-                      description: articles[index].description,
-                      url: articles[index].url,
-                      urlToImage: articles[index].urlToImage,
-                    );
-                  }),
+              child: Container(
+                margin: EdgeInsets.symmetric(
+                    vertical: Dimensions.height10,
+                    horizontal: Dimensions.width10),
+                child: ListView.builder(
+                    physics: const ClampingScrollPhysics(),
+                    itemCount: articles.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return NewsTemplate(
+                        title: articles[index].title,
+                        description: articles[index].description,
+                        url: articles[index].url,
+                        urlToImage: articles[index].urlToImage,
+                      );
+                    }),
+              ),
             ),
     );
   }
